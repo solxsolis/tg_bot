@@ -11,7 +11,7 @@ HOST = config['host']
 
 async def get_posts():
     conn = await asyncpg.connect(user=USER, password=PWD, database=DB, host=HOST)
-    rows = await conn.fetch('SELECT key, post_name FROM posts')
+    rows = await conn.fetch('SELECT * FROM posts ORDER BY key ASC')
     await conn.close()
     if not rows:
         return 'None'
