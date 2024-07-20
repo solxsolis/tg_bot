@@ -15,7 +15,6 @@ def generate_start_parameter():
 
 @dp.callback_query_handler(text='pay')
 async def user_make_payment_callback(callback_query: types.CallbackQuery):
-    await bot.delete_message(chat_id=callback_query.from_user.id, message_id=callback_query.message.message_id)
     start_parameter = generate_start_parameter()
     await bot.send_invoice(chat_id=callback_query.from_user.id,
                            title = 'Test payment',
