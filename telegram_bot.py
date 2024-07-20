@@ -38,6 +38,11 @@ from handlers.user_panel.view_posts import *
 from handlers.user_panel.get_refferal_link import *
 from handlers.user_panel.save_voice_message import *
 from handlers.user_panel.back_to_main_menu_user import *
+from handlers.user_panel.view_referrals import *
+from handlers.admin_panel.get_referral_link import *
+from handlers.admin_panel.view_referrals import *
+from handlers.cm_panel.get_referral_link import *
+from handlers.cm_panel.view_referrals import *
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates = True)

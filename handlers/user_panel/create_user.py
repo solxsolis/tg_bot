@@ -3,6 +3,7 @@ from config.bot_config import dp, bot
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from bd_handlers.role.create_user import create_user
+from keyboards.user_panel_keyboard_back_to_main_menu import user_keyboard_back_to_main_menu
 
 
 class FSM_create_user(StatesGroup):
@@ -21,5 +22,5 @@ async def load_user_name(message: types.Message, state: FSMContext):
         user_id = message.from_user.id
         await create_user(user_id=user_id, user_name=data['user_name'])
         await state.finish()
-        await bot.send_message(chat_id=message.from_user.id, text=f"\Account created successfully")
+        await bot.send_message(chat_id=message.from_user.id, text=f"Account created successfully", reply_markup=user_keyboard_back_to_main_menu)
      

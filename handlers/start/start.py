@@ -6,12 +6,24 @@ from bd_handlers.role.check_user_role import check_db_user_role
 from bd_handlers.get_post.get_post import get_posts
 from keyboards.user_panel_create import user_keyboard_create
 from keyboards.user_panel_keyboard_main_menu import user_keyboard_main_menu
-import logging
-logging.basicConfig(level=logging.INFO)
+from bd_handlers.referral.add_user import add_user
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
     user_id = message.from_user.id
+    referred_by = None
+
+    if message.get_args():
+        try:
+            referred_by = int(message.get_args())
+            if referred_by == user_id:
+                await message.reply("You cannot refer yourself")
+                return
+        except ValueError:
+            referred_by = None
+
+    await add_user(user_id, referred_by)
+
     check_user_role = await check_db_user_role(user_id=user_id)
     if check_user_role=='admin':
         await bot.send_message(chat_id=message.from_user.id, text=f"Your ID: {message.from_user.id}", reply_markup=admin_panel_keyboard_main_menu)
