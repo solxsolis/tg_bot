@@ -43,6 +43,7 @@ from handlers.admin_panel.get_referral_link import *
 from handlers.admin_panel.view_referrals import *
 from handlers.cm_panel.get_referral_link import *
 from handlers.cm_panel.view_referrals import *
+from handlers.payment.pay import *
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates = True)
