@@ -5,6 +5,7 @@ from keyboards.cm_panel_keyboard_main_menu import cm_keyboard_main_menu
 from bd_handlers.role.check_user_role import check_db_user_role
 from bd_handlers.get_post.get_post import get_posts
 from keyboards.user_panel_create import user_keyboard_create
+from keyboards.user_panel_keyboard_main_menu import user_keyboard_main_menu
 import logging
 logging.basicConfig(level=logging.INFO)
 
@@ -17,26 +18,8 @@ async def start(message: types.Message):
     elif check_user_role == 'cm':
         await bot.send_message(chat_id=message.from_user.id, text=f"Your ID: {message.from_user.id}", reply_markup=cm_keyboard_main_menu)
     elif check_user_role == 'user':
-        rows = await get_posts()
-        posts = []
-        for x in rows:
-            post = x
-            post_id = x['key']
-            post_name = x['post_name']
-            post_disc = x['post_disc']
-            post_link = x['post_link']
-            post_tag = x['post_tag']
-            post_string = f"<b>ID:</b>\n<i>{post_id}</i>\n"f"\n<b>Name:</b>\n<i>{post_name}</i>\n"f"\n<b>Description:</b>\n<i>{post_disc}</i>\n"f"\n<b>Link:</b>\n<i>{post_link}</i>\n"f"\n<b>Tag:</b>\n<i>#{post_tag}</i>\n"
-            posts.append(post_string)
-        num_posts = len(posts)
-        if num_posts == 0:
-            await bot.send_message(chat_id=message.from_user.id, text=f'No posts\n')
-        else:
-            for post in posts:
-                await bot.send_message(chat_id=message.from_user.id, text=post, parse_mode = 'HTML')
-
+        await bot.send_message(chat_id=message.from_user.id, text=f"Hello!", reply_markup=user_keyboard_main_menu)
     else:
-        logging.info(f"welcome message sent")
         await bot.send_message(chat_id=message.from_user.id, text=f'Welcome', reply_markup=user_keyboard_create)
         
 

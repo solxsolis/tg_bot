@@ -33,6 +33,11 @@ from handlers.cm_panel.change_post.states_change_post.post_tag import *
 from handlers.cm_panel.change_post.states_change_post.post_link import *
 from handlers.cm_panel.delete_post.delete_post import *
 from handlers.cm_panel.delete_post.states_delete_post.post_id import *
+from handlers.user_panel.create_user import *
+from handlers.user_panel.view_posts import *
+from handlers.user_panel.get_refferal_link import *
+from handlers.user_panel.save_voice_message import *
+from handlers.user_panel.back_to_main_menu_user import *
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates = True)
